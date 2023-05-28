@@ -5,18 +5,23 @@ import SuperHeroesPage from "./components/SuperHeroesPage";
 import RQSuperHeroesPage from "./components/RQSuperHeroesPage";
 import Navbar from "./components/Navbar";
 import { GlobalStyles } from "./components/styles/Global.styled";
+import { QueryClientProvider, QueryClient } from "react-query";
+
+const queryClient = new QueryClient();
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <GlobalStyles />
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/super-heroes" element={<SuperHeroesPage />} />
-        <Route path="/rq-super-heroes" element={<RQSuperHeroesPage />} />
-      </Routes>
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <GlobalStyles />
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/super-heroes" element={<SuperHeroesPage />} />
+          <Route path="/rq-super-heroes" element={<RQSuperHeroesPage />} />
+        </Routes>
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 };
 
