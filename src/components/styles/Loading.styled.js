@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Loading = styled.div`
+export const StyledLoading = styled.div`
   display: grid;
   place-items: center;
   height: 30vh;
