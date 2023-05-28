@@ -1,8 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import Loading from "./Loading";
 import { Container } from "./styles/Container.styled";
-import { Error } from "./styles/Error.styled";
-import { Loading } from "./styles/Loading.styled";
+import { StyledError } from "./styles/Error.styled";
+
 import { SuperHeroes } from "./styles/SuperHeroes.styled";
 
 const SuperHeroesPage = () => {
@@ -28,18 +29,14 @@ const SuperHeroesPage = () => {
   }, []);
 
   if (isLoading) {
-    return (
-      <Loading>
-        <h2>Loading...</h2>
-      </Loading>
-    );
+    return <Loading />;
   }
 
   if (error) {
     return (
-      <Error>
+      <StyledError>
         <h4>{error}</h4>
-      </Error>
+      </StyledError>
     );
   }
 
