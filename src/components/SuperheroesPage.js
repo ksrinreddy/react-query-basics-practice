@@ -13,7 +13,7 @@ const SuperHeroesPage = () => {
 
   const fetchSuperHeroes = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/superheroes1");
+      const response = await axios.get("http://localhost:4000/superheroes");
       setData(response.data);
       // console.log(data);
       setIsLoading(false);

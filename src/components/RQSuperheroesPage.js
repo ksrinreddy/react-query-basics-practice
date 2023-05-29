@@ -7,7 +7,7 @@ import { StyledError } from "./styles/Error.styled";
 import { RQSuperHeroes } from "./styles/RQSuperHeroes.styled";
 
 const fetchRQSuperHeroes = () => {
-  return axios.get("http://localhost:4000/superheroes1");
+  return axios.get("http://localhost:4000/superheroes");
 };
 
 const RQSuperHeroesPage = () => {
