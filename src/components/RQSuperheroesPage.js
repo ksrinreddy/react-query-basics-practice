@@ -11,7 +11,7 @@ const fetchRQSuperHeroes = () => {
 };
 
 const RQSuperHeroesPage = () => {
-  const { isLoading, data, isError, error, isFetching } = useQuery(
+  const { isLoading, data, isError, error, isFetching, refetch } = useQuery(
     "super-heroes",
     fetchRQSuperHeroes,
     {
@@ -19,14 +19,15 @@ const RQSuperHeroesPage = () => {
       // staleTime: 30000,
       // refetchOnMount: true,
       // refetchOnWindowFocus: true,
-      refetchInterval: 2000,
-      refetchIntervalInBackground: true,
+      // refetchInterval: 2000,
+      // refetchIntervalInBackground: true,
+      enabled: false,
     }
   );
   // console.log(data);
   console.log({ isLoading, isFetching });
 
-  if (isLoading) {
+  if (isLoading || isFetching) {
     return <Loading />;
   }
 
@@ -41,6 +42,7 @@ const RQSuperHeroesPage = () => {
     <RQSuperHeroes>
       <Container>
         <h3>RQ Super Heroes Page</h3>
+        <button onClick={refetch}>fetch heroes</button>
         {data?.data.map((hero) => {
           return <div key={hero.id}>{hero.name}</div>;
         })}
