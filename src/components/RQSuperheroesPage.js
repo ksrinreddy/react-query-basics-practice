@@ -17,8 +17,10 @@ const RQSuperHeroesPage = () => {
     {
       // cacheTime: 5000,
       // staleTime: 30000,
-      refetchOnMount: true,
-      refetchOnWindowFocus: true,
+      // refetchOnMount: true,
+      // refetchOnWindowFocus: true,
+      refetchInterval: 2000,
+      refetchIntervalInBackground: true,
     }
   );
   // console.log(data);
