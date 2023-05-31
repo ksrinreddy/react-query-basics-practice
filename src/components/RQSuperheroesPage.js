@@ -1,5 +1,5 @@
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "react-query";
 import Loading from "./Loading";
 import { Container } from "./styles/Container.styled";
@@ -8,9 +8,23 @@ import { RQSuperHeroes } from "./styles/RQSuperHeroes.styled";
 
 const fetchRQSuperHeroes = () => {
   return axios.get("http://localhost:4000/superheroes");
+  // return axios.get("http://localhost:4000/superheroes1");
 };
 
 const RQSuperHeroesPage = () => {
+  const [refetchInterval, setRefetchInterval] = useState(3000);
+  const onSuccess = (data) => {
+    console.log("perform side effect after fetching data", data);
+    if (data.data.length === 4) {
+      setRefetchInterval(false);
+    }
+  };
+
+  const onError = (error) => {
+    console.log("perform side effect after encountering error", error);
+    setRefetchInterval(false);
+  };
+
   const { isLoading, data, isError, error, isFetching, refetch } = useQuery(
     "super-heroes",
     fetchRQSuperHeroes,
@@ -19,9 +33,11 @@ const RQSuperHeroesPage = () => {
       // staleTime: 30000,
       // refetchOnMount: true,
       // refetchOnWindowFocus: true,
-      // refetchInterval: 2000,
+      refetchInterval: refetchInterval,
       // refetchIntervalInBackground: true,
-      enabled: false,
+      // enabled: false,
+      onSuccess,
+      onError,
     }
   );
   // console.log(data);
