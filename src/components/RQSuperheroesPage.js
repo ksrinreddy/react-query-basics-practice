@@ -1,15 +1,11 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useQuery } from "react-query";
+import { useSuperHeroesData } from "../hooks/useSuperHeroesData";
 import Loading from "./Loading";
 import { Container } from "./styles/Container.styled";
 import { StyledError } from "./styles/Error.styled";
 import { RQSuperHeroes } from "./styles/RQSuperHeroes.styled";
-
-const fetchRQSuperHeroes = () => {
-  return axios.get("http://localhost:4000/superheroes");
-  // return axios.get("http://localhost:4000/superheroes1");
-};
 
 const RQSuperHeroesPage = () => {
   const [refetchInterval, setRefetchInterval] = useState(3000);
@@ -25,25 +21,8 @@ const RQSuperHeroesPage = () => {
     setRefetchInterval(false);
   };
 
-  const { isLoading, data, isError, error, isFetching, refetch } = useQuery(
-    "super-heroes",
-    fetchRQSuperHeroes,
-    {
-      // cacheTime: 5000,
-      // staleTime: 30000,
-      // refetchOnMount: true,
-      // refetchOnWindowFocus: true,
-      // refetchInterval: refetchInterval,
-      // refetchIntervalInBackground: true,
-      // enabled: false,
-      onSuccess,
-      onError,
-      select: (data) => {
-        const superHeroNames = data.data.map((hero) => hero.name);
-        return superHeroNames;
-      },
-    }
-  );
+  const { isLoading, data, isError, error, isFetching, refetch } =
+    useSuperHeroesData(onSuccess, onError);
   // console.log(data);
   console.log({ isLoading, isFetching });
 
