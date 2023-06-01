@@ -15,9 +15,9 @@ const RQSuperHeroesPage = () => {
   const [refetchInterval, setRefetchInterval] = useState(3000);
   const onSuccess = (data) => {
     console.log("perform side effect after fetching data", data);
-    if (data.data.length === 4) {
-      setRefetchInterval(false);
-    }
+    // if (data.data.length === 4) {
+    //   setRefetchInterval(false);
+    // }
   };
 
   const onError = (error) => {
@@ -33,11 +33,15 @@ const RQSuperHeroesPage = () => {
       // staleTime: 30000,
       // refetchOnMount: true,
       // refetchOnWindowFocus: true,
-      refetchInterval: refetchInterval,
+      // refetchInterval: refetchInterval,
       // refetchIntervalInBackground: true,
       // enabled: false,
       onSuccess,
       onError,
+      select: (data) => {
+        const superHeroNames = data.data.map((hero) => hero.name);
+        return superHeroNames;
+      },
     }
   );
   // console.log(data);
@@ -59,8 +63,11 @@ const RQSuperHeroesPage = () => {
       <Container>
         <h3>RQ Super Heroes Page</h3>
         <button onClick={refetch}>fetch heroes</button>
-        {data?.data.map((hero) => {
+        {/* {data?.data.map((hero) => {
           return <div key={hero.id}>{hero.name}</div>;
+        })} */}
+        {data.map((heroName) => {
+          return <div key={heroName}>{heroName}</div>;
         })}
       </Container>
     </RQSuperHeroes>
