@@ -9,7 +9,7 @@ import { StyledError } from "./styles/Error.styled";
 import { RQSuperHeroes } from "./styles/RQSuperHeroes.styled";
 
 const RQSuperHeroesPage = () => {
-  const [refetchInterval, setRefetchInterval] = useState(3000);
+  // const [refetchInterval, setRefetchInterval] = useState(3000);
   const onSuccess = (data) => {
     console.log("perform side effect after fetching data", data);
     // if (data.data.length === 4) {
@@ -19,7 +19,7 @@ const RQSuperHeroesPage = () => {
 
   const onError = (error) => {
     console.log("perform side effect after encountering error", error);
-    setRefetchInterval(false);
+    // setRefetchInterval(false);
   };
 
   const { isLoading, data, isError, error, isFetching, refetch } =
