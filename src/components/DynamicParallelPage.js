@@ -19,7 +19,7 @@ const DynamicParallelPage = ({ heroIds }) => {
   console.log({ queryResults });
   return (
     <Container>
-      <div>DynamicParallelPage</div>;
+      <div>DynamicParallelPage</div>
     </Container>
   );
 };
