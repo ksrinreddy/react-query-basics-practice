@@ -1,6 +1,6 @@
-import axios from "axios";
+// import axios from "axios";
 import React, { useState } from "react";
-import { useQuery } from "react-query";
+// import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import { useSuperHeroesData } from "../hooks/useSuperHeroesData";
 import Loading from "./Loading";
