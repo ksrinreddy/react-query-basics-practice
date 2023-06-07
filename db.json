@@ -19,6 +19,11 @@
       "id": 4,
       "name": "Wonder Woman 2",
       "alterEgo": "Princess Charli"
+    },
+    {
+      "name": "aadipurush",
+      "alterEgo": "prabhas",
+      "id": 5
     }
   ],
   "friends": [
@@ -44,7 +49,11 @@
   "channels": [
     {
       "id": "codevolution",
-      "courses": ["react", "vue", "angular"]
+      "courses": [
+        "react",
+        "vue",
+        "angular"
+      ]
     }
   ],
   "colors": [

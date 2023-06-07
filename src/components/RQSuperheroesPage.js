@@ -1,31 +1,38 @@
-// import axios from "axios";
 import React, { useState } from "react";
-// import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
-import { useSuperHeroesData } from "../hooks/useSuperHeroesData";
+import {
+  useAddSuperHeroData,
+  useSuperHeroesData,
+} from "../hooks/useSuperHeroesData";
 import Loading from "./Loading";
 import { Container } from "./styles/Container.styled";
 import { StyledError } from "./styles/Error.styled";
 import { RQSuperHeroes } from "./styles/RQSuperHeroes.styled";
 
 const RQSuperHeroesPage = () => {
-  // const [refetchInterval, setRefetchInterval] = useState(3000);
+  const [name, setName] = useState("");
+  const [alterEgo, setAlterEgo] = useState("");
+
   const onSuccess = (data) => {
     console.log("perform side effect after fetching data", data);
-    // if (data.data.length === 4) {
-    //   setRefetchInterval(false);
-    // }
   };
 
   const onError = (error) => {
     console.log("perform side effect after encountering error", error);
-    // setRefetchInterval(false);
   };
 
   const { isLoading, data, isError, error, isFetching, refetch } =
     useSuperHeroesData(onSuccess, onError);
   // console.log(data);
-  console.log({ isLoading, isFetching });
+  // console.log({ isLoading, isFetching });
+
+  const { mutate: addHero } = useAddSuperHeroData();
+
+  const handleAddHeroClick = () => {
+    console.log({ name, alterEgo });
+    const hero = { name, alterEgo };
+    addHero(hero);
+  };
 
   if (isLoading || isFetching) {
     return <Loading />;
@@ -42,6 +49,19 @@ const RQSuperHeroesPage = () => {
     <RQSuperHeroes>
       <Container>
         <h3>RQ Super Heroes Page</h3>
+        <div>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <input
+            type="text"
+            value={alterEgo}
+            onChange={(e) => setAlterEgo(e.target.value)}
+          />
+          <button onClick={handleAddHeroClick}>add hero</button>
+        </div>
         <button onClick={refetch}>fetch heroes</button>
         {data?.data.map((hero) => {
           return (
@@ -50,9 +70,6 @@ const RQSuperHeroesPage = () => {
             </div>
           );
         })}
-        {/* {data.map((heroName) => {
-          return <div key={heroName}>{heroName}</div>;
-        })} */}
       </Container>
     </RQSuperHeroes>
   );
