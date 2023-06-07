@@ -34,7 +34,7 @@ const RQSuperHeroesPage = () => {
     addHero(hero);
   };
 
-  if (isLoading || isFetching) {
+  if (isLoading) {
     return <Loading />;
   }
 
